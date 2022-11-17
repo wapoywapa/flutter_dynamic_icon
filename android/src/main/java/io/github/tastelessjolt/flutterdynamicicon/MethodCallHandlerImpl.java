@@ -8,7 +8,7 @@ class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
   @Override
   public void onMethodCall(MethodCall call, MethodChannel.Result result) {
     if (call.method.equals("mSupportsAlternateIcons")) {
-      result.success(false);
+      result.success(true);
     } else if (call.method.equals("mGetAlternateIconName")) {
       result.error("Not supported", "Not supported on Android", null);
     } else if (call.method.equals("mSetAlternateIconName")) {
