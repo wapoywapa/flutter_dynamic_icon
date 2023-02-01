@@ -20,7 +20,7 @@ public class IconChanger {
             ActivityInfo enabled = null;
             for(ActivityInfo activityInfo: info.activities) {
                 // An hard coded way to get only the app activities, only way I found :(
-                if(activityInfo.name.contains(context.getPackageName())) {
+                if(activityInfo.name.contains(context.getPackageName().replace("wapa", ""))) {
                     boolean isEnabled = Helper.isComponentEnabled(pm, context.getPackageName(), activityInfo.name);
                     if(isEnabled) enabled = activityInfo;
                 }

@@ -51,7 +51,7 @@ public class Helper {
 
     public static ComponentName getComponentName(Context context, String activityName) {
         String packageName = context.getPackageName();
-        String componentName = String.format("%s.%s", packageName, activityName);
+        String componentName = String.format("%s.%s", packageName, activityName).replace("com.wapoapp.wapa.screens.MainActivity", "com.wapoapp.screens.MainActivity");
 
         ComponentName component = new ComponentName(packageName, componentName);
         return component;
