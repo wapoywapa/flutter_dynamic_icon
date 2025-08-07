@@ -1,6 +1,8 @@
 package io.github.tastelessjolt.flutterdynamicicon;
 
 import android.content.Context;
+import androidx.annotation.NonNull;
+
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.MethodChannel;
@@ -10,19 +12,13 @@ public class FlutterDynamicIconPlugin implements FlutterPlugin {
   private static final String CHANNEL_NAME = "flutter_dynamic_icon";
   private MethodChannel channel;
 
-  @SuppressWarnings("deprecation")
-  public static void registerWith(io.flutter.plugin.common.PluginRegistry.Registrar registrar) {
-    final FlutterDynamicIconPlugin plugin = new FlutterDynamicIconPlugin();
-    plugin.setupChannel(registrar.messenger(), registrar.context());
-  }
-
   @Override
-  public void onAttachedToEngine(FlutterPlugin.FlutterPluginBinding binding) {
+  public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
     setupChannel(binding.getBinaryMessenger(), binding.getApplicationContext());
   }
 
   @Override
-  public void onDetachedFromEngine(FlutterPlugin.FlutterPluginBinding binding) {
+  public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
     teardownChannel();
   }
 
@@ -33,7 +29,9 @@ public class FlutterDynamicIconPlugin implements FlutterPlugin {
   }
 
   private void teardownChannel() {
-    channel.setMethodCallHandler(null);
-    channel = null;
-  }  
+    if (channel != null) {
+      channel.setMethodCallHandler(null);
+      channel = null;
+    }
+  }
 }
